@@ -16,14 +16,13 @@ fn main() {
 
                 // match can_frame
                 match can_frame {
-                    Ok(frame) => {
-                    },
+                    Ok(frame) => {}
                     Err(err) => {
                         // print error
                         println!("{}", err);
                     }
                 }
-            }  
+            }
         }
         Err(e) => {
             // print canSocketOpenError message
