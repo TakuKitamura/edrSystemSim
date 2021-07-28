@@ -1,5 +1,11 @@
 # rust
-/target
+rust-lib/target
 
 # meta
 .vscode
+
+# misraC-Checker
+misraC-Checker
+
+# executable file
+main

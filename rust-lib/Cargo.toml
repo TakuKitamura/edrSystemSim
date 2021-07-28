@@ -1,10 +1,13 @@
 [package]
-name = "edr-system-sim"
-version = "0.1.0"
 authors = ["TakuKitamura <takukitamura.io@gmail.com>"]
 edition = "2018"
+name = "edr-system-sim"
+version = "0.1.0"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-socketcan = "1.7.0"
+
+[lib]
+# crate-type = ["cdylib"]
+crate-type = ["staticlib"]
