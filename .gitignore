@@ -9,3 +9,6 @@ misraC-Checker
 
 # executable file
 main
+
+# ttool-fstar
+*.xml~
