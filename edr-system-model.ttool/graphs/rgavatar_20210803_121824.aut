@@ -1,0 +1,3 @@
+digraph TToolAvatarGraph {
+ 0 -> 1[label="i(EDRSystemBlock/) [0...0]"];
+}

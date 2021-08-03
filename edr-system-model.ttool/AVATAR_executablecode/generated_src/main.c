@@ -16,7 +16,7 @@ pthread_mutex_t __mainMutex;
 /* Synchronous channels */
 /* Asynchronous channels */
 
-#include "MainBlock.h"
+#include "EDRSystemBlock.h"
 
 
 int main(int argc, char *argv[]) {
@@ -28,7 +28,7 @@ int main(int argc, char *argv[]) {
   /* Asynchronous channels */
   
   /* Threads of tasks */
-  pthread_t thread__MainBlock;
+  pthread_t thread__EDRSystemBlock;
   /* Activating tracing  */
   /* Activating randomness */
   initRandom();
@@ -39,10 +39,10 @@ if (pthread_mutex_init(&__mainMutex, NULL) < 0) { exit(-1);}
   initMessages();
   
   
-  pthread_create(&thread__MainBlock, NULL, mainFunc__MainBlock, (void *)"MainBlock");
+  pthread_create(&thread__EDRSystemBlock, NULL, mainFunc__EDRSystemBlock, (void *)"EDRSystemBlock");
   
   
-  pthread_join(thread__MainBlock, NULL);
+  pthread_join(thread__EDRSystemBlock, NULL);
   
   
   return 0;
