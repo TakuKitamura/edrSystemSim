@@ -20,6 +20,8 @@ __attribute__((unused)) request __req0__EDRSystemBlock;
 __attribute__((unused))int *__params0__EDRSystemBlock[0];
 __attribute__((unused)) request __req1__EDRSystemBlock;
 __attribute__((unused))int *__params1__EDRSystemBlock[0];
+__attribute__((unused)) request __req2__EDRSystemBlock;
+__attribute__((unused))int *__params2__EDRSystemBlock[0];
 __attribute__((unused))setOfRequests __list__EDRSystemBlock;
 __attribute__((unused))pthread_cond_t __myCond__EDRSystemBlock;
 __attribute__((unused))request *__returnRequest__EDRSystemBlock;

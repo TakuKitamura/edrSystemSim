@@ -30,6 +30,8 @@ int main(int argc, char *argv[]) {
   /* Threads of tasks */
   pthread_t thread__EDRSystemBlock;
   /* Activating tracing  */
+  /* Activating debug messages */
+  activeDebug();
   /* Activating randomness */
   initRandom();
   /* Initializing the main mutex */
@@ -39,12 +41,15 @@ if (pthread_mutex_init(&__mainMutex, NULL) < 0) { exit(-1);}
   initMessages();
   
   
+  debugMsg("Starting tasks");
   pthread_create(&thread__EDRSystemBlock, NULL, mainFunc__EDRSystemBlock, (void *)"EDRSystemBlock");
   
   
+  debugMsg("Joining tasks");
   pthread_join(thread__EDRSystemBlock, NULL);
   
   
+  debugMsg("Application terminated");
   return 0;
   
 }
