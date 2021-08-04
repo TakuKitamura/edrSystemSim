@@ -18,8 +18,8 @@
 void *mainFunc__EDRSystemBlock(void *arg){
   int recordInEDRFlag = 0;
   can_frame packet = INIT_PACKET;
-  validation_result_type validationResult = INIT_VALIDATION_RESLUT;
-  record_in_edr_result_type recordInEDRResult = INIT_RECORD_IN_EDR_RESLUT;
+  fstar_int32 validationResult = INIT_VALIDATION_RESLUT;
+  int recordInEDRResult = 0;
   
   int __currentState = STATE__START__STATE;
   
@@ -50,11 +50,11 @@ void *mainFunc__EDRSystemBlock(void *arg){
       
       case STATE__CheckRecordInEDRFlagState: 
       if (recordInEDRFlag == 1) {
-        makeNewRequest(&__req0__EDRSystemBlock, 307, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 1528, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (recordInEDRFlag == 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 349, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 1557, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -89,11 +89,11 @@ void *mainFunc__EDRSystemBlock(void *arg){
       
       case STATE__CheckValidationResultState: 
       if (validationResult.struct_error.codde > 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 312, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 1533, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (validationResult.struct_error.code == 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 337, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 1545, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -116,21 +116,22 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__RecordInEDRState: 
+      recordInEDRResult = EDRSystemBlock__recordInEDR(packet.can_id, packet.can_dlc, packet.data);
       debug2Msg(__myname, "-> (=====) Entering state + CheckRecordInEDRResultState");
       __currentState = STATE__CheckRecordInEDRResultState;
       break;
       
       case STATE__CheckRecordInEDRResultState: 
-      if (recordInEDRResult.struct_error.code > 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 317, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (recordInEDRResult == 2) {
+        makeNewRequest(&__req0__EDRSystemBlock, 1538, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
-      if (recordInEDRResult.value == 1&&recordInEDRResult.struct_error.code==0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 321, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+      if (recordInEDRResult == 1) {
+        makeNewRequest(&__req1__EDRSystemBlock, 1542, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
-      if (recordInEDRResult.value == 0&&recordInEDRResult.struct_error.code==0) {
-        makeNewRequest(&__req2__EDRSystemBlock, 359, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+      if (recordInEDRResult == 0) {
+        makeNewRequest(&__req2__EDRSystemBlock, 1567, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {

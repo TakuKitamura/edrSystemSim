@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="1">
+<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="0">
 
 <Modeling type="AVATAR Design" nameTab="Design" tabs="Block Diagram$EDRSystemBlock" >
 <AVATARBlockDiagramPanel name="Block Diagram" minX="10" maxX="2500" minY="10" maxY="1500" zoom="1.0" >
 <MainCode value="void __user_init() {"/>
 <MainCode value="}"/>
-<Optimized value="true" />
-<considerTimingOperators value="true" />
+<Optimized value="false" />
+<considerTimingOperators value="false" />
 <Validated value="EDRSystemBlock;" />
 <Ignored value="" />
 
@@ -46,11 +46,11 @@
 <CryptoBlock value="false" />
 <Attribute access="0" id="recordInEDRFlag" value="0" type="8" typeOther="" refinementType="" />
 <Attribute access="0" id="packet" value="INIT_PACKET" type="5" typeOther="can_frame" refinementType="" />
-<Attribute access="0" id="validationResult" value="INIT_VALIDATION_RESLUT" type="5" typeOther="validation_result_type" refinementType="" />
-<Attribute access="0" id="recordInEDRResult" value="INIT_RECORD_IN_EDR_RESLUT" type="5" typeOther="record_in_edr_result_type" refinementType="" />
+<Attribute access="0" id="validationResult" value="INIT_VALIDATION_RESLUT" type="5" typeOther="fstar_int32" refinementType="" />
+<Attribute access="0" id="recordInEDRResult" value="0" type="8" typeOther="record_in_edr_result_type" refinementType="" />
 <Method value="can_frame packetCapture()" requireRefinementType="" ensureRefinementType="" logic="" />
-<Method value="validation_result_type validatePacketData(can_id uint32_t, can_dlc uint8_t, frame_data uint8_t*)" requireRefinementType="" ensureRefinementType="" logic="" />
-<Method value="record_in_edr_result_type recordInEDR(can_id uint32_t, can_dlc uint8_t, frame_data uint8_t*)" requireRefinementType="" ensureRefinementType="" logic="" />
+<Method value="fstar_int32 validatePacketData(can_id uint32_t, can_dlc uint8_t, frame_data uint8_t*)" requireRefinementType="" ensureRefinementType="" logic="" />
+<Method value="int recordInEDR(can_id uint32_t, can_dlc uint8_t, frame_data uint8_t*)" requireRefinementType="" ensureRefinementType="" logic="" />
 </extraparam>
 </COMPONENT>
 
@@ -58,6 +58,41 @@
 </AVATARBlockDiagramPanel>
 
 <AVATARStateMachineDiagramPanel name="EDRSystemBlock" minX="10" maxX="2500" minY="10" maxY="1500" >
+<CONNECTOR type="5102" id="1054" >
+<cdparam x="987" y="824" />
+<sizeparam width="0" height="0" minWidth="0" minHeight="0" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<infoparam name="connector" value="null" />
+<TGConnectingPoint num="0" id="1055" />
+<P1  x="987" y="824" id="617" />
+<P2  x="987" y="941" id="539" />
+<AutomaticDrawing  data="true" />
+</CONNECTOR><SUBCOMPONENT type="-1" id="1056" uid="324a6c41-0327-4fb8-879b-3b48bd4d7cd4" >
+<father id="1054" num="0" />
+<cdparam x="527" y="878" />
+<sizeparam width="456" height="30" minWidth="0" minHeight="0" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<hidden value="false" />
+<enabled value="true" />
+<cdrectangleparam minX="10" maxX="2500" minY="10" maxY="1500" />
+<infoparam name="List of all parameters of an Avatar SMD transition" value="" />
+<TGConnectingPoint num="0" id="1057" />
+<TGConnectingPoint num="1" id="1058" />
+<TGConnectingPoint num="2" id="1059" />
+<TGConnectingPoint num="3" id="1060" />
+<extraparam>
+<guard value="[ ]" enabled="true"/>
+<afterMin value="" enabled="true"/>
+<afterMax value="" enabled="true"/>
+<extraDelay1 value="" enabled="true"/>
+<extraDelay2 value="" enabled="true"/>
+<delayDistributionLaw value="0" enabled="true"/>
+<computeMin value="" enabled="true"/>
+<computeMax value="" enabled="true"/>
+<probability value="" enabled="true"/>
+<actions value="recordInEDRResult = recordInEDR(packet.can_id, packet.can_dlc, packet.data)" enabled="true"/>
+<actions value="" enabled="true"/>
+</extraparam>
+</SUBCOMPONENT>
+
 <CONNECTOR type="5102" id="32" >
 <cdparam x="834" y="508" />
 <sizeparam width="0" height="0" minWidth="0" minHeight="0" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
@@ -231,7 +266,7 @@
 <TGConnectingPoint num="2" id="59" />
 <TGConnectingPoint num="3" id="60" />
 <extraparam>
-<guard value="[ recordInEDRResult.struct_error.code &gt; 0 ]" enabled="true"/>
+<guard value="[ recordInEDRResult == 2 ]" enabled="true"/>
 <afterMin value="" enabled="true"/>
 <afterMax value="" enabled="true"/>
 <extraDelay1 value="" enabled="true"/>
@@ -274,7 +309,7 @@
 <TGConnectingPoint num="2" id="68" />
 <TGConnectingPoint num="3" id="69" />
 <extraparam>
-<guard value="[ recordInEDRResult.value == 1 &amp;&amp; recordInEDRResult.struct_error.code == 0 ]" enabled="true"/>
+<guard value="[ recordInEDRResult == 1 ]" enabled="true"/>
 <afterMin value="" enabled="true"/>
 <afterMax value="" enabled="true"/>
 <extraDelay1 value="" enabled="true"/>
@@ -283,40 +318,6 @@
 <computeMin value="" enabled="true"/>
 <computeMax value="" enabled="true"/>
 <probability value="" enabled="true"/>
-</extraparam>
-</SUBCOMPONENT>
-
-<CONNECTOR type="5102" id="80" >
-<cdparam x="1147" y="825" />
-<sizeparam width="0" height="0" minWidth="0" minHeight="0" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
-<infoparam name="connector" value="null" />
-<TGConnectingPoint num="0" id="79" />
-<P1  x="987" y="824" id="617" />
-<P2  x="987" y="941" id="571" />
-<AutomaticDrawing  data="true" />
-</CONNECTOR><SUBCOMPONENT type="-1" id="78" uid="590e987f-e9f3-40b4-89b9-c08efe5e14b6" >
-<father id="80" num="0" />
-<cdparam x="533" y="886" />
-<sizeparam width="462" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
-<hidden value="false" />
-<enabled value="true" />
-<cdrectangleparam minX="10" maxX="2500" minY="10" maxY="1500" />
-<infoparam name="List of all parameters of an Avatar SMD transition" value="" />
-<TGConnectingPoint num="0" id="74" />
-<TGConnectingPoint num="1" id="75" />
-<TGConnectingPoint num="2" id="76" />
-<TGConnectingPoint num="3" id="77" />
-<extraparam>
-<guard value="[ ]" enabled="true"/>
-<afterMin value="" enabled="true"/>
-<afterMax value="" enabled="true"/>
-<extraDelay1 value="" enabled="true"/>
-<extraDelay2 value="" enabled="true"/>
-<delayDistributionLaw value="0" enabled="true"/>
-<computeMin value="" enabled="true"/>
-<computeMax value="" enabled="true"/>
-<probability value="" enabled="true"/>
-<actions value="recordInEDResult = recordInEDR(packet.can_id, packet.can_dlc, packet.data)" enabled="true"/>
 </extraparam>
 </SUBCOMPONENT>
 
@@ -397,7 +398,7 @@
 <AutomaticDrawing  data="true" />
 </CONNECTOR><SUBCOMPONENT type="-1" id="99" uid="5434b4c3-cb75-45f6-93d5-0e26fdc0efe0" >
 <father id="101" num="0" />
-<cdparam x="1141" y="178" />
+<cdparam x="1141" y="145" />
 <sizeparam width="10" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
@@ -528,7 +529,7 @@
 <AutomaticDrawing  data="true" />
 </CONNECTOR><SUBCOMPONENT type="-1" id="126" uid="9aff807c-497c-4c9f-a963-207a8ffed519" >
 <father id="128" num="0" />
-<cdparam x="740" y="1079" />
+<cdparam x="806" y="1077" />
 <sizeparam width="475" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
@@ -539,7 +540,7 @@
 <TGConnectingPoint num="2" id="124" />
 <TGConnectingPoint num="3" id="125" />
 <extraparam>
-<guard value="[ recordInEDRResult.value == 0 &amp;&amp; recordInEDRResult.struct_error.code == 0 ]" enabled="true"/>
+<guard value="[ recordInEDRResult == 0 ] ]" enabled="true"/>
 <afterMin value="" enabled="true"/>
 <afterMax value="" enabled="true"/>
 <extraDelay1 value="" enabled="true"/>
