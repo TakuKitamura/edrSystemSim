@@ -1,5 +1,10 @@
 #include "EDRSystemBlock.h"
 
+
+// Header code defined in the model
+
+// End of header code defined in the model
+
 #define STATE__START__STATE 0
 #define STATE__EDRSystemStartState 1
 #define STATE__PacketCaptureState 2
@@ -34,27 +39,28 @@ void *mainFunc__EDRSystemBlock(void *arg){
   while(__currentState != STATE__STOP__STATE) {
     switch(__currentState) {
       case STATE__START__STATE: 
-      debug2Msg(__myname, "-> (=====) Entering state + EDRSystemStartState");
+      traceStateEntering(__myname, "__StartState");
       __currentState = STATE__EDRSystemStartState;
       break;
       
       case STATE__EDRSystemStartState: 
-      debug2Msg(__myname, "-> (=====) Entering state + PacketCaptureState");
+      traceStateEntering(__myname, "EDRSystemStartState");
       __currentState = STATE__PacketCaptureState;
       break;
       
       case STATE__PacketCaptureState: 
-      debug2Msg(__myname, "-> (=====) Entering state + CheckRecordInEDRFlagState");
+      traceStateEntering(__myname, "PacketCaptureState");
       __currentState = STATE__CheckRecordInEDRFlagState;
       break;
       
       case STATE__CheckRecordInEDRFlagState: 
+      traceStateEntering(__myname, "CheckRecordInEDRFlagState");
       if (recordInEDRFlag == 1) {
-        makeNewRequest(&__req0__EDRSystemBlock, 1528, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 48, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (recordInEDRFlag == 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 1557, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 77, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -64,36 +70,39 @@ void *mainFunc__EDRSystemBlock(void *arg){
       }
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
+      traceRequest(__myname, __returnRequest__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        debug2Msg(__myname, "-> (=====) Entering state + EDRSystemEndState");
         __currentState = STATE__EDRSystemEndState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
         packet = EDRSystemBlock__packetCapture();
-        debug2Msg(__myname, "-> (=====) Entering state + PacketParseState");
+        traceVariableModification("EDRSystemBlock", "packet", packet,1);
         __currentState = STATE__PacketParseState;
         
       }
       break;
       
       case STATE__EDRSystemEndState: 
+      traceStateEntering(__myname, "EDRSystemEndState");
       __currentState = STATE__STOP__STATE;
       break;
       
       case STATE__PacketParseState: 
+      traceStateEntering(__myname, "PacketParseState");
       validationResult = EDRSystemBlock__validatePacketData(packet.can_id, packet.can_dlc, packet.data);
-      debug2Msg(__myname, "-> (=====) Entering state + CheckValidationResultState");
+      traceVariableModification("EDRSystemBlock", "validationResult", validationResult,1);
       __currentState = STATE__CheckValidationResultState;
       break;
       
       case STATE__CheckValidationResultState: 
+      traceStateEntering(__myname, "CheckValidationResultState");
       if (validationResult.struct_error.codde > 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 1533, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 53, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (validationResult.struct_error.code == 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 1545, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 65, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -103,35 +112,36 @@ void *mainFunc__EDRSystemBlock(void *arg){
       }
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
+      traceRequest(__myname, __returnRequest__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        debug2Msg(__myname, "-> (=====) Entering state + ValidationErrorState");
         __currentState = STATE__ValidationErrorState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
-        debug2Msg(__myname, "-> (=====) Entering state + RecordInEDRState");
         __currentState = STATE__RecordInEDRState;
         
       }
       break;
       
       case STATE__RecordInEDRState: 
+      traceStateEntering(__myname, "RecordInEDRState");
       recordInEDRResult = EDRSystemBlock__recordInEDR(packet.can_id, packet.can_dlc, packet.data);
-      debug2Msg(__myname, "-> (=====) Entering state + CheckRecordInEDRResultState");
+      traceVariableModification("EDRSystemBlock", "recordInEDRResult", recordInEDRResult,0);
       __currentState = STATE__CheckRecordInEDRResultState;
       break;
       
       case STATE__CheckRecordInEDRResultState: 
+      traceStateEntering(__myname, "CheckRecordInEDRResultState");
       if (recordInEDRResult == 2) {
-        makeNewRequest(&__req0__EDRSystemBlock, 1538, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 58, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (recordInEDRResult == 1) {
-        makeNewRequest(&__req1__EDRSystemBlock, 1542, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 62, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (recordInEDRResult == 0) {
-        makeNewRequest(&__req2__EDRSystemBlock, 1567, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+        makeNewRequest(&__req2__EDRSystemBlock, 87, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -141,41 +151,40 @@ void *mainFunc__EDRSystemBlock(void *arg){
       }
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
+      traceRequest(__myname, __returnRequest__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        debug2Msg(__myname, "-> (=====) Entering state + EDRErrorState");
         __currentState = STATE__EDRErrorState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
-        debug2Msg(__myname, "-> (=====) Entering state + WroteEventToRecordState");
         __currentState = STATE__WroteEventToRecordState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req2__EDRSystemBlock) {
-        debug2Msg(__myname, "-> (=====) Entering state + NormalLoopState");
         __currentState = STATE__NormalLoopState;
         
       }
       break;
       
       case STATE__WroteEventToRecordState: 
+      traceStateEntering(__myname, "WroteEventToRecordState");
       recordInEDRFlag = 1;
-      debug2Msg(__myname, "-> (=====) Entering state + PacketCaptureState");
+      traceVariableModification("EDRSystemBlock", "recordInEDRFlag", recordInEDRFlag,0);
       __currentState = STATE__PacketCaptureState;
       break;
       
       case STATE__EDRErrorState: 
-      debug2Msg(__myname, "-> (=====) Entering state + PacketCaptureState");
+      traceStateEntering(__myname, "EDRErrorState");
       __currentState = STATE__PacketCaptureState;
       break;
       
       case STATE__NormalLoopState: 
-      debug2Msg(__myname, "-> (=====) Entering state + PacketCaptureState");
+      traceStateEntering(__myname, "NormalLoopState");
       __currentState = STATE__PacketCaptureState;
       break;
       
       case STATE__ValidationErrorState: 
-      debug2Msg(__myname, "-> (=====) Entering state + PacketCaptureState");
+      traceStateEntering(__myname, "ValidationErrorState");
       __currentState = STATE__PacketCaptureState;
       break;
       
