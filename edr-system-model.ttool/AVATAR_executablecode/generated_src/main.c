@@ -10,12 +10,6 @@
 #include "random.h"
 #include "tracemanager.h"
 
-/* User code */
-void __user_init() {
-}
-
-/* End of User code */
-
 /* Main mutex */
 pthread_mutex_t __mainMutex;
 
@@ -36,11 +30,6 @@ int main(int argc, char *argv[]) {
   /* Threads of tasks */
   pthread_t thread__EDRSystemBlock;
   /* Activating tracing  */
-  if (argc>1){
-    activeTracingInFile(argv[1]);
-  } else {
-    activeTracingInConsole();
-  }
   /* Activating randomness */
   initRandom();
   /* Initializing the main mutex */
@@ -48,8 +37,6 @@ if (pthread_mutex_init(&__mainMutex, NULL) < 0) { exit(-1);}
   
   /* Initializing mutex of messages */
   initMessages();
-  /* User initialization */
-  __user_init();
   
   
   pthread_create(&thread__EDRSystemBlock, NULL, mainFunc__EDRSystemBlock, (void *)"EDRSystemBlock");

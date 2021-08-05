@@ -13,7 +13,7 @@
 
 <COMPONENT type="5000" id="25" uid="2358cb42-a743-4750-a7ea-f5e09fcc9d38" >
 <cdparam x="194" y="64" />
-<sizeparam width="502" height="200" minWidth="5" minHeight="2" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="636" height="200" minWidth="5" minHeight="2" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="10" maxX="2500" minY="10" maxY="1500" />
 <infoparam name="Block0" value="EDRSystemBlock" />
@@ -49,9 +49,8 @@
 <Attribute access="0" id="validationResult" value="INIT_VALIDATION_RESLUT" type="5" typeOther="fstar_int32" refinementType="" />
 <Attribute access="0" id="recordInEDRResult" value="0" type="8" typeOther="record_in_edr_result_type" refinementType="" />
 <Method value="can_frame packetCapture()" requireRefinementType="" ensureRefinementType="" logic="" />
-<Method value="fstar_int32 validatePacketData(uint32 can_id, uint8 can_dlc, uint8[] frame_data)" requireRefinementType="" ensureRefinementType="" logic="" />
+<Method value="fstar_int32 validatePacketData(uint32 can_id, uint8 can_dlc, uint8[] frame_data)" requireRefinementType="" ensureRefinementType="" logic="len(frame_data) &amp;gt; 0" />
 <Method value="int recordInEDR(uint32 can_id, uint8 can_dlc, uint8[] frame_data)" requireRefinementType="" ensureRefinementType="" logic="" />
-<Method value="ccc()" requireRefinementType="" ensureRefinementType="" logic="" />
 </extraparam>
 </COMPONENT>
 
