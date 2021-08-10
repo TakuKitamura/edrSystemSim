@@ -68,6 +68,7 @@ int main(void)
                         printf(", ");
                     }
                 }
+		/*
 
                 // F* Func
                 struct struct_ret checkFrameData =
@@ -90,9 +91,10 @@ int main(void)
                 {
                     printf("parse frame error message: %s(%d)", checkFrameData.struct_error.message, checkFrameData.struct_error.code)
                 }
+		*/
             }
         }
     }
 
     return return_code;
-}:
+}
