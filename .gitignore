@@ -3,6 +3,7 @@ rust-lib/target
 
 # meta
 .vscode
+.DS_Store
 
 # misraC-Checker
 misraC-Checker
