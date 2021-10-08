@@ -3,7 +3,7 @@
 <TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="0">
 
 <Modeling type="AVATAR Design" nameTab="Design" tabs="Block Diagram$EDRSystemBlock" >
-<AVATARBlockDiagramPanel name="Block Diagram" minX="16" maxX="25000" minY="16" maxY="15000" zoom="1.5625" >
+<AVATARBlockDiagramPanel name="Block Diagram" minX="13" maxX="20000" minY="13" maxY="12000" zoom="1.25" >
 <MainCode value="void __user_init() {"/>
 <MainCode value="}"/>
 <Optimized value="false" />
@@ -12,8 +12,8 @@
 <Ignored value="" />
 
 <COMPONENT type="5000" id="25" uid="2358cb42-a743-4750-a7ea-f5e09fcc9d38" >
-<cdparam x="489" y="514" />
-<sizeparam width="1028" height="377" minWidth="7" minHeight="3" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<cdparam x="391" y="411" />
+<sizeparam width="822" height="302" minWidth="7" minHeight="3" maxWidth="2500" maxHeight="2500" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="10" maxX="16000" minY="10" maxY="9600" />
 <infoparam name="Block0" value="EDRSystemBlock" />
