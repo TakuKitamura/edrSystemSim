@@ -3,7 +3,7 @@
 <TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="0">
 
 <Modeling type="AVATAR Design" nameTab="Design" tabs="Block Diagram$EDRSystemBlock" >
-<AVATARBlockDiagramPanel name="Block Diagram" minX="13" maxX="20000" minY="13" maxY="12000" zoom="1.25" >
+<AVATARBlockDiagramPanel name="Block Diagram" minX="13" maxX="25000" minY="13" maxY="15000" zoom="1.25" >
 <MainCode value="void __user_init() {"/>
 <MainCode value="}"/>
 <Optimized value="false" />
@@ -13,9 +13,9 @@
 
 <COMPONENT type="5000" id="25" uid="2358cb42-a743-4750-a7ea-f5e09fcc9d38" >
 <cdparam x="391" y="411" />
-<sizeparam width="822" height="302" minWidth="7" minHeight="3" maxWidth="2500" maxHeight="2500" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="822" height="302" minWidth="7" minHeight="3" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
-<cdrectangleparam minX="10" maxX="16000" minY="10" maxY="9600" />
+<cdrectangleparam minX="10" maxX="20000" minY="10" maxY="12000" />
 <infoparam name="Block0" value="EDRSystemBlock" />
 <TGConnectingPoint num="0" id="1" />
 <TGConnectingPoint num="1" id="2" />
@@ -56,9 +56,9 @@
 <Attribute access="0" id="recordInEDRResult" value="" type="5" typeOther="int32" refinementType="" />
 <Method value="can_frame packetCapture()" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
 <Method value="int recordInEDR(uint32 can_id, uint8 can_dlc, uint8[] frame_data)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
-<Method value="fstar_int32_array parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;  can_id == 0x1b4 &amp;&amp; can_dlc == 5 &amp;&amp; get(data, 1) &amp;gt;= 0xD0 &amp;&amp; get(data, 2) == 0 &amp;&amp; get(data, 3) == 0 &amp;&amp; get(data, 4) == 0 &amp;&amp; len(data) == 8 &amp;&amp;  can_id == 0x1b4 &amp;&amp; can_dlc == 5 &amp;&amp; get(data, 1) &amp;gt;= 0xD0 &amp;&amp; get(data, 2) == 0 &amp;&amp; get(data, 3) == 0 &amp;&amp; get(data, 4) == 0" ensureRefinementType="(code == 0 &amp;&amp;     len(ret) == 2 ) || code == 1" requireLogic="" ensureLogic="" />
-<Method value="fstar_uint8 parseDoor(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;     can_id == 0x19B &amp;&amp;     can_dlc == 6 &amp;&amp;     get(data, 0) == 0 &amp;&amp;     get(data, 1) == 0 &amp;&amp;     get(data, 2) &amp;lt;= 0x0F &amp;&amp;     get(data, 3) == 0 &amp;&amp;     get(data, 4) == 0 &amp;&amp;     get(data, 5) == 0" ensureRefinementType="(code == 0 &amp;&amp;         ret == get(data, 2)     ) || code == 1" requireLogic="" ensureLogic="" />
-<Method value="fstar_uint8 parseIndicator(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;     can_id == 0x188 &amp;&amp;     can_dlc == 4 &amp;&amp;     get(data, 0) &amp;lt;= 0x02 &amp;&amp;     get(data, 1) == 0 &amp;&amp;     get(data, 2) == 0 &amp;&amp;     get(data, 3) == 0" ensureRefinementType="(code == 0 &amp;&amp;         ret == get(data, 0)) || code == 1" requireLogic="" ensureLogic="" />
+<Method value="fstar_int32_array parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;  can_id == 0x1b4 &amp;&amp; can_dlc == 5 &amp;&amp; get(data, 1) &amp;gt;= 0xD0 &amp;&amp; get(data, 2) == 0 &amp;&amp; get(data, 3) == 0 &amp;&amp; get(data, 4) == 0 &amp;&amp; len(data) == 8 &amp;&amp;  can_id == 0x1b4 &amp;&amp; can_dlc == 5 &amp;&amp; get(data, 1) &amp;gt;= 0xD0 &amp;&amp; get(data, 2) == 0 &amp;&amp; get(data, 3) == 0 &amp;&amp; get(data, 4) == 0" ensureRefinementType="(fstar_int32_array.error.code == 0 &amp;&amp;     len(fstar_int32_array.value) == 2 ) || fstar_int32_array.error.code == 1" requireLogic="" ensureLogic="" />
+<Method value="fstar_uint8 parseDoor(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;     can_id == 0x19B &amp;&amp;     can_dlc == 6 &amp;&amp;     get(data, 0) == 0 &amp;&amp;     get(data, 1) == 0 &amp;&amp;     get(data, 2) &amp;lt;= 0x0F &amp;&amp;     get(data, 3) == 0 &amp;&amp;     get(data, 4) == 0 &amp;&amp;     get(data, 5) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp;         fstar_uint8.value == get(data, 2)     ) || fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
+<Method value="fstar_uint8 parseIndicator(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;     can_id == 0x188 &amp;&amp;     can_dlc == 4 &amp;&amp;     get(data, 0) &amp;lt;= 0x02 &amp;&amp;     get(data, 1) == 0 &amp;&amp;     get(data, 2) == 0 &amp;&amp;     get(data, 3) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp;         fstar_uint8.value == get(data, 0)) || fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
 </extraparam>
 </COMPONENT>
 
