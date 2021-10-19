@@ -59,15 +59,15 @@ void *mainFunc__EDRSystemBlock(void *arg){
       
       case STATE__PacketParseState: 
       if (canID == 0x19b) {
-        makeNewRequest(&__req0__EDRSystemBlock, 110, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 272, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (canID == 0x188) {
-        makeNewRequest(&__req1__EDRSystemBlock, 114, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 276, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (canID == 0x1b4) {
-        makeNewRequest(&__req2__EDRSystemBlock, 118, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+        makeNewRequest(&__req2__EDRSystemBlock, 280, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -100,11 +100,11 @@ void *mainFunc__EDRSystemBlock(void *arg){
       
       case STATE__CheckValidationResultState: 
       if (code > 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 57, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 219, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (code == 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 61, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 223, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -131,15 +131,15 @@ void *mainFunc__EDRSystemBlock(void *arg){
       
       case STATE__CheckRecordInEDRResultState: 
       if (recordInEDRResult == 2) {
-        makeNewRequest(&__req0__EDRSystemBlock, 136, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 298, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (recordInEDRResult == 1) {
-        makeNewRequest(&__req1__EDRSystemBlock, 140, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 302, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (recordInEDRResult == 0) {
-        makeNewRequest(&__req2__EDRSystemBlock, 145, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+        makeNewRequest(&__req2__EDRSystemBlock, 307, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
