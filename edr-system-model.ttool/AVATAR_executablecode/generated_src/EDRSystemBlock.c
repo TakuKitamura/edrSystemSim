@@ -19,15 +19,15 @@
 
 void *mainFunc__EDRSystemBlock(void *arg){
   can_frame canFrame;
-  uint32 canID;
-  uint8 canDLC;
-  uint8[] data;
+  uint32_t canID;
+  uint8_t canDLC;
+  uint8_t* data;
   fstar_int32_array speed;
   fstar_uint8 indicator;
   fstar_uint8 door;
-  uint32 code;
-  uint8[] message;
-  int32 recordInEDRResult;
+  uint32_t code;
+  uint8_t* message;
+  int32_t recordInEDRResult;
   
   int __currentState = STATE__START__STATE;
   
