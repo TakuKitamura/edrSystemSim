@@ -45,15 +45,15 @@
 <blockType data="block" color="-4072719" />
 <CryptoBlock value="false" />
 <Attribute access="0" id="canFrame" value="" type="5" typeOther="can_frame" refinementType="" />
-<Attribute access="0" id="canID" value="" type="5" typeOther="uint32" refinementType="" />
-<Attribute access="0" id="canDLC" value="" type="5" typeOther="uint8" refinementType="" />
-<Attribute access="0" id="data" value="" type="5" typeOther="uint8[]" refinementType="" />
+<Attribute access="0" id="canID" value="" type="103" typeOther="uint32" refinementType="" />
+<Attribute access="0" id="canDLC" value="" type="101" typeOther="uint8" refinementType="" />
+<Attribute access="0" id="data" value="" type="5" typeOther="uint8_t*" refinementType="" />
 <Attribute access="0" id="speed" value="" type="5" typeOther="fstar_int32_array" refinementType="" />
 <Attribute access="0" id="indicator" value="" type="5" typeOther="fstar_uint8" refinementType="" />
 <Attribute access="0" id="door" value="" type="5" typeOther="fstar_uint8" refinementType="" />
-<Attribute access="0" id="code" value="" type="5" typeOther="uint32" refinementType="" />
-<Attribute access="0" id="message" value="" type="5" typeOther="uint8[]" refinementType="" />
-<Attribute access="0" id="recordInEDRResult" value="" type="5" typeOther="int32" refinementType="" />
+<Attribute access="0" id="code" value="" type="103" typeOther="uint32" refinementType="" />
+<Attribute access="0" id="message" value="" type="5" typeOther="uint8_t*" refinementType="" />
+<Attribute access="0" id="recordInEDRResult" value="" type="203" typeOther="int32" refinementType="" />
 <Method value="can_frame packetCapture()" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
 <Method value="int recordInEDR(uint32 can_id, uint8 can_dlc, uint8[] frame_data)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
 <Method value="fstar_int32_array parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp; 
