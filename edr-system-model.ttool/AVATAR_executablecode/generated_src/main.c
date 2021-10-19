@@ -30,11 +30,6 @@ int main(int argc, char *argv[]) {
   /* Threads of tasks */
   pthread_t thread__EDRSystemBlock;
   /* Activating tracing  */
-  if (argc>1){
-    activeTracingInFile(argv[1]);
-  } else {
-    activeTracingInConsole();
-  }
   /* Activating randomness */
   initRandom();
   /* Initializing the main mutex */
