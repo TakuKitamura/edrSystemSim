@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="1">
+<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="0">
 
 <Modeling type="AVATAR Design" nameTab="Design" tabs="Block Diagram$EDRSystemBlock" >
 <AVATARBlockDiagramPanel name="Block Diagram" minX="20" maxX="25000" minY="20" maxY="15000" zoom="1.953125" >
@@ -8,12 +8,12 @@
 <MainCode value="}"/>
 <Optimized value="false" />
 <considerTimingOperators value="false" />
-<Validated value="" />
+<Validated value="EDRSystemBlock;" />
 <Ignored value="" />
 
 <COMPONENT type="5000" id="25" uid="2358cb42-a743-4750-a7ea-f5e09fcc9d38" >
 <cdparam x="610" y="642" />
-<sizeparam width="1285" height="471" minWidth="12" minHeight="5" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="1285" height="557" minWidth="12" minHeight="5" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="10" maxX="12800" minY="10" maxY="7680" />
 <infoparam name="Block0" value="EDRSystemBlock" />
@@ -48,17 +48,19 @@
 <Attribute access="0" id="canID" value="" type="5" typeOther="uint32" refinementType="" />
 <Attribute access="0" id="canDLC" value="" type="5" typeOther="uint8" refinementType="" />
 <Attribute access="0" id="data" value="" type="5" typeOther="uint8[]" refinementType="" />
-<Attribute access="0" id="speed" value="" type="5" typeOther="fstar_int32_array" refinementType="" />
+<Attribute access="0" id="speed" value="" type="5" typeOther="fstar_uint8_array" refinementType="" />
 <Attribute access="0" id="indicator" value="" type="5" typeOther="fstar_uint8" refinementType="" />
 <Attribute access="0" id="door" value="" type="5" typeOther="fstar_uint8" refinementType="" />
 <Attribute access="0" id="code" value="" type="5" typeOther="uint32" refinementType="" />
 <Attribute access="0" id="message" value="" type="5" typeOther="uint8[]" refinementType="" />
 <Attribute access="0" id="recordInEDRResult" value="" type="5" typeOther="int32" refinementType="" />
+<Attribute access="0" id="fd" value="" type="5" typeOther="int32" refinementType="" />
+<Attribute access="0" id="timestamp" value="" type="5" typeOther="int64" refinementType="" />
 <Method value="can_frame packetCapture()" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
-<Method value="int recordInEDR(uint32 can_id, uint8 can_dlc, uint8[] frame_data)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
-<Method value="fstar_int32_array parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp; &amp;return;can_id == 0x1b4 &amp;&amp;&amp;return;can_dlc == 5 &amp;&amp;&amp;return;get(data, 1) &amp;gt;= 0xD0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0 &amp;&amp;&amp;return;len(data) == 8 &amp;&amp;&amp;return;can_id == 0x1b4 &amp;&amp;&amp;return;can_dlc == 5 &amp;&amp;&amp;return;get(data, 1) &amp;gt;= 0xD0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0" ensureRefinementType="(fstar_int32_array.error.code == 0 &amp;&amp; len(fstar_int32_array.value) == 2 ) ||&amp;return;fstar_int32_array.error.code == 1" requireLogic="" ensureLogic="" />
+<Method value="fstar_uint8_array parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp; &amp;return;can_id == 0x1b4 &amp;&amp;&amp;return;can_dlc == 5 &amp;&amp;&amp;return;get(data, 1) &amp;gt;= 0xD0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0" ensureRefinementType="(fstar_uint8_array.error.code == 0 &amp;&amp; len(fstar_uint8_array.value) == 2 ) ||&amp;return;fstar_uint8_array.error.code == 1" requireLogic="" ensureLogic="" />
 <Method value="fstar_uint8 parseDoor(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x19B &amp;&amp;&amp;return;can_dlc == 6 &amp;&amp;&amp;return;get(data, 0) == 0 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) &amp;lt;= 0x0F &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0 &amp;&amp;&amp;return;get(data, 5) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 2)) ||&amp;return;fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
 <Method value="fstar_uint8 parseIndicator(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x188 &amp;&amp;&amp;return;can_dlc == 4 &amp;&amp;&amp;return;get(data, 0) &amp;lt;= 0x02 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 0)) ||&amp;return;fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
+<Method value="int record_in_edr(uint32 can_id, time_t timestamp, uint8[] speed, uint8 indicator, uint8 door)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
 </extraparam>
 </COMPONENT>
 
@@ -109,8 +111,8 @@
 <AutomaticDrawing  data="true" />
 </CONNECTOR><SUBCOMPONENT type="-1" id="37" uid="c0fcd883-c9f3-4378-a67b-e28eff04743a" >
 <father id="39" num="0" />
-<cdparam x="901" y="370" />
-<sizeparam width="167" height="60" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<cdparam x="896" y="360" />
+<sizeparam width="200" height="90" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="10" maxX="19995" minY="10" maxY="11995" />
@@ -129,10 +131,12 @@
 <computeMin value="" enabled="true"/>
 <computeMax value="" enabled="true"/>
 <probability value="" enabled="true"/>
-<actions value="canFrame = packetCapture()" enabled="true"/>
+<actions value="canFrame = packetCapture(fd)" enabled="true"/>
 <actions value="canID = canFrame.can_id" enabled="true"/>
 <actions value="canDLC = canFrame.can_dlc" enabled="true"/>
 <actions value="data = canFrame.data" enabled="true"/>
+<actions value="timestamp = canFrame.timestamp" enabled="true"/>
+<actions value="" enabled="true"/>
 </extraparam>
 </SUBCOMPONENT>
 
@@ -331,8 +335,8 @@
 <AutomaticDrawing  data="true" />
 </CONNECTOR><SUBCOMPONENT type="-1" id="83" uid="324a6c41-0327-4fb8-879b-3b48bd4d7cd4" >
 <father id="85" num="0" />
-<cdparam x="413" y="1049" />
-<sizeparam width="455" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<cdparam x="417" y="1043" />
+<sizeparam width="455" height="30" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="10" maxX="1995" minY="10" maxY="1195" />
@@ -351,7 +355,8 @@
 <computeMin value="" enabled="true"/>
 <computeMax value="" enabled="true"/>
 <probability value="" enabled="true"/>
-<actions value="recordInEDRResult = recordInEDR(canID, speed, indicator, door)" enabled="true"/>
+<actions value="recordInEDRResult = record_in_edr(canID, timestamp, speed, indicator, door)" enabled="true"/>
+<actions value="" enabled="true"/>
 </extraparam>
 </SUBCOMPONENT>
 
@@ -408,7 +413,7 @@
 <AutomaticDrawing  data="true" />
 </CONNECTOR><SUBCOMPONENT type="-1" id="99" uid="7ccd7dd5-b591-4e3b-aa22-33aa77a0cb05" >
 <father id="101" num="0" />
-<cdparam x="886" y="508" />
+<cdparam x="886" y="531" />
 <sizeparam width="115" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
@@ -612,8 +617,8 @@
 <AutomaticDrawing  data="true" />
 </CONNECTOR><SUBCOMPONENT type="-1" id="140" uid="a3b7b2e2-0761-4be5-b7de-6c46ab473030" >
 <father id="142" num="0" />
-<cdparam x="883" y="220" />
-<sizeparam width="10" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<cdparam x="889" y="216" />
+<sizeparam width="93" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="10" maxX="19997" minY="10" maxY="11997" />
@@ -632,6 +637,7 @@
 <computeMin value="" enabled="true"/>
 <computeMax value="" enabled="true"/>
 <probability value="" enabled="true"/>
+<actions value="fd = getSocket()" enabled="true"/>
 </extraparam>
 </SUBCOMPONENT>
 
@@ -2131,12 +2137,13 @@
 </COMPONENT>
 
 <COMPONENT type="301" id="1283" uid="72f50944-b527-4795-8bfb-6eea18147100" >
-<cdparam x="264" y="1056" />
-<sizeparam width="516" height="27" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<cdparam x="896" y="309" />
+<sizeparam width="343" height="39" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
-<infoparam name="UML Note" value="Rustで書く
-理由：メモリ安全性は必要であるものの,網羅的な検証が必要となるほどの機能ではないため
+<infoparam name="UML Note" value="MISRA Cで書く
+理由：基本的にはSocetCAN用のライブラリを信用するのと,
+ライブラリさえ利用すれば実現が容易な機能であるため.
 " />
 <TGConnectingPoint num="0" id="1267" />
 <TGConnectingPoint num="1" id="1268" />
@@ -2155,19 +2162,21 @@
 <TGConnectingPoint num="14" id="1281" />
 <TGConnectingPoint num="15" id="1282" />
 <extraparam>
-<Line value="Rustで書く" />
-<Line value="理由：メモリ安全性は必要であるものの,網羅的な検証が必要となるほどの機能ではないため" />
+<Line value="MISRA Cで書く" />
+<Line value="理由：基本的にはSocetCAN用のライブラリを信用するのと," />
+<Line value="ライブラリさえ利用すれば実現が容易な機能であるため." />
 </extraparam>
 </COMPONENT>
 
-<COMPONENT type="301" id="1300" uid="72f50944-b527-4795-8bfb-6eea18147100" >
-<cdparam x="898" y="313" />
-<sizeparam width="343" height="39" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<COMPONENT type="301" id="1300" uid="00e4a3fe-1f6f-495e-bdad-99e25c5be079" >
+<cdparam x="737" y="470" />
+<sizeparam width="320" height="39" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
-<infoparam name="UML Note" value="MISRA Cで書く
-理由：基本的にはSocetCAN用のライブラリを信用するのと,
-ライブラリさえ利用すれば実現が容易な機能であるため." />
+<infoparam name="UML Note" value="機能：〇〇パケットをパースし,
+正常なパケットか異常パケットか判定し,
+正常なパケットであればパース結果を返り値として返す
+" />
 <TGConnectingPoint num="0" id="1284" />
 <TGConnectingPoint num="1" id="1285" />
 <TGConnectingPoint num="2" id="1286" />
@@ -2185,9 +2194,103 @@
 <TGConnectingPoint num="14" id="1298" />
 <TGConnectingPoint num="15" id="1299" />
 <extraparam>
-<Line value="MISRA Cで書く" />
-<Line value="理由：基本的にはSocetCAN用のライブラリを信用するのと," />
-<Line value="ライブラリさえ利用すれば実現が容易な機能であるため." />
+<Line value="機能：〇〇パケットをパースし," />
+<Line value="正常なパケットか異常パケットか判定し," />
+<Line value="正常なパケットであればパース結果を返り値として返す" />
+</extraparam>
+</COMPONENT>
+
+<COMPONENT type="301" id="1317" uid="00e4a3fe-1f6f-495e-bdad-99e25c5be079" >
+<cdparam x="1083" y="370" />
+<sizeparam width="289" height="27" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<hidden value="false" />
+<cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
+<infoparam name="UML Note" value="機能：CANパケットをライブラリ関数で読み取り,
+読み取ったデータを返り値として返す.
+" />
+<TGConnectingPoint num="0" id="1301" />
+<TGConnectingPoint num="1" id="1302" />
+<TGConnectingPoint num="2" id="1303" />
+<TGConnectingPoint num="3" id="1304" />
+<TGConnectingPoint num="4" id="1305" />
+<TGConnectingPoint num="5" id="1306" />
+<TGConnectingPoint num="6" id="1307" />
+<TGConnectingPoint num="7" id="1308" />
+<TGConnectingPoint num="8" id="1309" />
+<TGConnectingPoint num="9" id="1310" />
+<TGConnectingPoint num="10" id="1311" />
+<TGConnectingPoint num="11" id="1312" />
+<TGConnectingPoint num="12" id="1313" />
+<TGConnectingPoint num="13" id="1314" />
+<TGConnectingPoint num="14" id="1315" />
+<TGConnectingPoint num="15" id="1316" />
+<extraparam>
+<Line value="機能：CANパケットをライブラリ関数で読み取り," />
+<Line value="読み取ったデータを返り値として返す." />
+</extraparam>
+</COMPONENT>
+
+<COMPONENT type="301" id="1334" uid="72f50944-b527-4795-8bfb-6eea18147100" >
+<cdparam x="808" y="1054" />
+<sizeparam width="248" height="39" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<hidden value="false" />
+<cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
+<infoparam name="UML Note" value="EDRに書き込む可能性があるプロパティを
+構造体配列に保持
+(最大: 10秒分)
+" />
+<TGConnectingPoint num="0" id="1318" />
+<TGConnectingPoint num="1" id="1319" />
+<TGConnectingPoint num="2" id="1320" />
+<TGConnectingPoint num="3" id="1321" />
+<TGConnectingPoint num="4" id="1322" />
+<TGConnectingPoint num="5" id="1323" />
+<TGConnectingPoint num="6" id="1324" />
+<TGConnectingPoint num="7" id="1325" />
+<TGConnectingPoint num="8" id="1326" />
+<TGConnectingPoint num="9" id="1327" />
+<TGConnectingPoint num="10" id="1328" />
+<TGConnectingPoint num="11" id="1329" />
+<TGConnectingPoint num="12" id="1330" />
+<TGConnectingPoint num="13" id="1331" />
+<TGConnectingPoint num="14" id="1332" />
+<TGConnectingPoint num="15" id="1333" />
+<extraparam>
+<Line value="EDRに書き込む可能性があるプロパティを" />
+<Line value="構造体配列に保持" />
+<Line value="(最大: 10秒分)" />
+</extraparam>
+</COMPONENT>
+
+<COMPONENT type="301" id="1351" uid="72f50944-b527-4795-8bfb-6eea18147100" >
+<cdparam x="469" y="1054" />
+<sizeparam width="296" height="39" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<hidden value="false" />
+<cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
+<infoparam name="UML Note" value="Rustで書く
+理由：メモリ安全性は必要であるものの,
+網羅的な検証が必要となるほどの機能ではないため
+" />
+<TGConnectingPoint num="0" id="1335" />
+<TGConnectingPoint num="1" id="1336" />
+<TGConnectingPoint num="2" id="1337" />
+<TGConnectingPoint num="3" id="1338" />
+<TGConnectingPoint num="4" id="1339" />
+<TGConnectingPoint num="5" id="1340" />
+<TGConnectingPoint num="6" id="1341" />
+<TGConnectingPoint num="7" id="1342" />
+<TGConnectingPoint num="8" id="1343" />
+<TGConnectingPoint num="9" id="1344" />
+<TGConnectingPoint num="10" id="1345" />
+<TGConnectingPoint num="11" id="1346" />
+<TGConnectingPoint num="12" id="1347" />
+<TGConnectingPoint num="13" id="1348" />
+<TGConnectingPoint num="14" id="1349" />
+<TGConnectingPoint num="15" id="1350" />
+<extraparam>
+<Line value="Rustで書く" />
+<Line value="理由：メモリ安全性は必要であるものの," />
+<Line value="網羅的な検証が必要となるほどの機能ではないため" />
 </extraparam>
 </COMPONENT>
 

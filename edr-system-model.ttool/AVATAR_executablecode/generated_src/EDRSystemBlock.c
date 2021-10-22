@@ -22,12 +22,14 @@ void *mainFunc__EDRSystemBlock(void *arg){
   uint32_t canID;
   uint8_t canDLC;
   uint8_t* data;
-  fstar_int32_array speed;
+  fstar_uint8_array speed;
   fstar_uint8 indicator;
   fstar_uint8 door;
   uint32_t code;
   uint8_t* message;
   int32_t recordInEDRResult;
+  int32_t fd;
+  int64 timestamp;
   
   int __currentState = STATE__START__STATE;
   
@@ -46,28 +48,30 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__EDRSystemStartState: 
+      fd = getSocket();
       __currentState = STATE__PacketCaptureState;
       break;
       
       case STATE__PacketCaptureState: 
-      canFrame = packetCapture();
+      canFrame = packetCapture(fd);
       canID = canFrame.can_id;
       canDLC = canFrame.can_dlc;
       data = canFrame.data;
+      timestamp = canFrame.timestamp;
       __currentState = STATE__PacketParseState;
       break;
       
       case STATE__PacketParseState: 
-      if (canID == 0x19b) {
-        makeNewRequest(&__req0__EDRSystemBlock, 272, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (canID == 0x1b4) {
+        makeNewRequest(&__req0__EDRSystemBlock, 278, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (canID == 0x188) {
-        makeNewRequest(&__req1__EDRSystemBlock, 276, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 282, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
-      if (canID == 0x1b4) {
-        makeNewRequest(&__req2__EDRSystemBlock, 280, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+      if (canID == 0x19b) {
+        makeNewRequest(&__req2__EDRSystemBlock, 286, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -78,7 +82,7 @@ void *mainFunc__EDRSystemBlock(void *arg){
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        __currentState = STATE__ParseDoorState;
+        __currentState = STATE__ParseSpeedState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
@@ -86,7 +90,7 @@ void *mainFunc__EDRSystemBlock(void *arg){
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req2__EDRSystemBlock) {
-        __currentState = STATE__ParseSpeedState;
+        __currentState = STATE__ParseDoorState;
         
       }
       break;
@@ -99,12 +103,12 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__CheckValidationResultState: 
-      if (code > 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 219, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (code == 0) {
+        makeNewRequest(&__req0__EDRSystemBlock, 340, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
-      if (code == 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 223, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+      if (code > 0) {
+        makeNewRequest(&__req1__EDRSystemBlock, 343, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -115,31 +119,31 @@ void *mainFunc__EDRSystemBlock(void *arg){
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        __currentState = STATE__ValidationErrorState;
+        __currentState = STATE__RecordInEDRState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
-        __currentState = STATE__RecordInEDRState;
+        __currentState = STATE__ValidationErrorState;
         
       }
       break;
       
       case STATE__RecordInEDRState: 
-      recordInEDRResult = recordInEDR(canID, speed, indicator, door);
+      recordInEDRResult = record_in_edr(canID, timestamp, speed, indicator, door);
       __currentState = STATE__CheckRecordInEDRResultState;
       break;
       
       case STATE__CheckRecordInEDRResultState: 
-      if (recordInEDRResult == 2) {
-        makeNewRequest(&__req0__EDRSystemBlock, 298, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (recordInEDRResult == 0) {
+        makeNewRequest(&__req0__EDRSystemBlock, 255, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (recordInEDRResult == 1) {
-        makeNewRequest(&__req1__EDRSystemBlock, 302, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 260, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
-      if (recordInEDRResult == 0) {
-        makeNewRequest(&__req2__EDRSystemBlock, 307, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+      if (recordInEDRResult == 2) {
+        makeNewRequest(&__req2__EDRSystemBlock, 264, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -150,7 +154,7 @@ void *mainFunc__EDRSystemBlock(void *arg){
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        __currentState = STATE__EDRErrorState;
+        __currentState = STATE__NormalLoopState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
@@ -158,7 +162,7 @@ void *mainFunc__EDRSystemBlock(void *arg){
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req2__EDRSystemBlock) {
-        __currentState = STATE__NormalLoopState;
+        __currentState = STATE__EDRErrorState;
         
       }
       break;
