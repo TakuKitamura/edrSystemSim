@@ -32,9 +32,8 @@ val parseSpeed_body:
   can_dlc: U8.t ->
   data: B.buffer U8.t ->
   
-Stack (fstar_uint8_array: fstar_uint8_array) (requires fun h0 -> 
-    B.live h0 data /\
-    (((B.length data) = (8)) &&
+Stack fstar_uint8_array (requires fun h0 -> 
+    B.live h0 data /\ (((B.length data) = (8)) &&
     (U32.eq can_id 0x1b4ul) &&
     (U8.eq can_dlc 5uy) &&
     (U8.gte (B.get h0 data 1) 0xD0uy) &&
@@ -55,9 +54,8 @@ val parseSpeed:
   can_dlc: U8.t ->
   data: B.buffer U8.t ->
   
-  Stack (fstar_uint8_array: fstar_uint8_array) (requires fun h0 -> 
-    B.live h0 data /\
-    (((B.length data) = (8)))
+  Stack fstar_uint8_array (requires fun h0 -> 
+    B.live h0 data /\ (((B.length data) = (8)))
   )
   (ensures fun h0 fstar_uint8_array h1 -> 
     (((I32.eq fstar_uint8_array.error.code 0l) &&

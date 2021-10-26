@@ -32,9 +32,8 @@ val parseIndicator_body:
   can_dlc: U8.t ->
   data: B.buffer U8.t ->
   
-Stack (fstar_uint8: fstar_uint8) (requires fun h0 -> 
-    B.live h0 data /\
-    (((B.length data) = (8)) &&
+Stack fstar_uint8 (requires fun h0 -> 
+    B.live h0 data /\ (((B.length data) = (8)) &&
     (U32.eq can_id 0x188ul) &&
     (U8.eq can_dlc 4uy) &&
     (U8.lte (B.get h0 data 0) 0x02uy) &&
@@ -55,9 +54,8 @@ val parseIndicator:
   can_dlc: U8.t ->
   data: B.buffer U8.t ->
   
-  Stack (fstar_uint8: fstar_uint8) (requires fun h0 -> 
-    B.live h0 data /\
-    (((B.length data) = (8)))
+  Stack fstar_uint8 (requires fun h0 -> 
+    B.live h0 data /\ (((B.length data) = (8)))
   )
   (ensures fun h0 fstar_uint8 h1 -> 
     (((I32.eq fstar_uint8.error.code 0l) &&
