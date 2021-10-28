@@ -18,18 +18,21 @@
 #define STATE__STOP__STATE 15
 
 void *mainFunc__EDRSystemBlock(void *arg){
-  uint32_t canID;
-  uint8_t canDLC;
-  uint8_t* data;
-  fstar_uint8_array speed;
-  fstar_uint8 indicator;
-  fstar_uint8 door;
-  uint32_t code;
-  C_String_t message;
-  int32_t recordInEDRResult;
   int32_t fd;
   int64_t timestamp;
   can_packet canPacket;
+  uint32_t canID;
+  uint8_t canDLC;
+  uint8_t* data;
+  fstar_uint16 speed;
+  uint16_t speedValue;
+  fstar_uint8 indicator;
+  uint8_t indicatorValue;
+  fstar_uint8 door;
+  uint8_t doorValue;
+  C_String_t message;
+  uint32_t code;
+  int32_t recordInEDRResult;
   
   int __currentState = STATE__START__STATE;
   
@@ -62,17 +65,21 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__PacketParseState: 
-      if (canID == 0x1b4) {
-        makeNewRequest(&__req0__EDRSystemBlock, 624, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (canID != 0x1b4&&canID!=0x188&&canID!=0x19b) {
+        makeNewRequest(&__req0__EDRSystemBlock, 254, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
-      if (canID == 0x188) {
-        makeNewRequest(&__req1__EDRSystemBlock, 628, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+      if (canID == 0x1b4) {
+        makeNewRequest(&__req1__EDRSystemBlock, 303, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
-      if (canID == 0x19b) {
-        makeNewRequest(&__req2__EDRSystemBlock, 632, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+      if (canID == 0x188) {
+        makeNewRequest(&__req2__EDRSystemBlock, 307, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
+      }
+      if (canID == 0x19b) {
+        makeNewRequest(&__req3__EDRSystemBlock, 311, IMMEDIATE, 0, 0, 0, 0, __params3__EDRSystemBlock);
+        addRequestToList(&__list__EDRSystemBlock, &__req3__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
         debug2Msg(__myname, "No possible request");
@@ -82,14 +89,18 @@ void *mainFunc__EDRSystemBlock(void *arg){
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        __currentState = STATE__ParseSpeedState;
+        __currentState = STATE__PacketCaptureState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
-        __currentState = STATE__ParseIndicatorState;
+        __currentState = STATE__ParseSpeedState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req2__EDRSystemBlock) {
+        __currentState = STATE__ParseIndicatorState;
+        
+      }
+      else  if (__returnRequest__EDRSystemBlock == &__req3__EDRSystemBlock) {
         __currentState = STATE__ParseDoorState;
         
       }
@@ -99,16 +110,17 @@ void *mainFunc__EDRSystemBlock(void *arg){
       speed = parseSpeed(canID, canDLC, data);
       code = speed.error.code;
       message = speed.error.message;
+      speedValue = speed.value;
       __currentState = STATE__CheckValidationResultState;
       break;
       
       case STATE__CheckValidationResultState: 
       if (code == 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 686, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 377, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (code > 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 689, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 380, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -129,21 +141,21 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__RecordInEDRState: 
-      recordInEDRResult = record_in_edr(canID, timestamp, speed, indicator, door);
+      recordInEDRResult = record_in_edr(canID, timestamp, speedValue, indicatorValue, doorValue);
       __currentState = STATE__CheckRecordInEDRResultState;
       break;
       
       case STATE__CheckRecordInEDRResultState: 
       if (recordInEDRResult == 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 601, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+        makeNewRequest(&__req0__EDRSystemBlock, 280, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
       if (recordInEDRResult == 1) {
-        makeNewRequest(&__req1__EDRSystemBlock, 606, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+        makeNewRequest(&__req1__EDRSystemBlock, 285, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (recordInEDRResult == 2) {
-        makeNewRequest(&__req2__EDRSystemBlock, 610, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+        makeNewRequest(&__req2__EDRSystemBlock, 289, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -191,6 +203,7 @@ void *mainFunc__EDRSystemBlock(void *arg){
       door = parseDoor(canID, canDLC, data);
       code = door.error.code;
       message = door.error.message;
+      doorValue = door.value;
       __currentState = STATE__CheckValidationResultState;
       break;
       
@@ -198,6 +211,7 @@ void *mainFunc__EDRSystemBlock(void *arg){
       indicator = parseIndicator(canID, canDLC, data);
       code = indicator.error.code;
       message = indicator.error.message;
+      indicatorValue = indicator.value;
       __currentState = STATE__CheckValidationResultState;
       break;
       

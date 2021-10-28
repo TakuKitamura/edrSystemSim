@@ -22,8 +22,8 @@ noeq type struct_error = {
   message: C.String.t;
 }
 
-noeq type fstar_uint8_array = {
-    value: B.buffer U8.t;
+noeq type fstar_uint16 = {
+    value: U16.t;
     error: struct_error;
 }
 
@@ -32,7 +32,7 @@ val parseSpeed_body:
   can_dlc: U8.t ->
   data: B.buffer U8.t ->
   
-Stack fstar_uint8_array (requires fun h0 -> 
+Stack fstar_uint16 (requires fun h0 -> 
     B.live h0 data /\ (((B.length data) = (8)) &&
     (U32.eq can_id 0x1b4ul) &&
     (U8.eq can_dlc 5uy) &&
@@ -41,10 +41,10 @@ Stack fstar_uint8_array (requires fun h0 ->
     (U8.eq (B.get h0 data 3) 0uy) &&
     (U8.eq (B.get h0 data 4) 0uy))
   )
-  (ensures fun h0 fstar_uint8_array h1 -> 
-    (((I32.eq fstar_uint8_array.error.code 0l) &&
-    ((B.length fstar_uint8_array.value) = (2))) ||
-    (I32.eq fstar_uint8_array.error.code 1l))
+  (ensures fun h0 fstar_uint16 h1 -> 
+    (((I32.eq fstar_uint16.error.code 0l) &&
+    (U16.lte fstar_uint16.value 0x2fd0us)) ||
+    (I32.eq fstar_uint16.error.code 1l))
   )
 let parseSpeed_body can_id can_dlc data  =
     // TODO: you need to implement this function here
@@ -54,13 +54,13 @@ val parseSpeed:
   can_dlc: U8.t ->
   data: B.buffer U8.t ->
   
-  Stack fstar_uint8_array (requires fun h0 -> 
+  Stack fstar_uint16 (requires fun h0 -> 
     B.live h0 data /\ (((B.length data) = (8)))
   )
-  (ensures fun h0 fstar_uint8_array h1 -> 
-    (((I32.eq fstar_uint8_array.error.code 0l) &&
-    ((B.length fstar_uint8_array.value) = (2))) ||
-    (I32.eq fstar_uint8_array.error.code 1l))
+  (ensures fun h0 fstar_uint16 h1 -> 
+    (((I32.eq fstar_uint16.error.code 0l) &&
+    (U16.lte fstar_uint16.value 0x2fd0us)) ||
+    (I32.eq fstar_uint16.error.code 1l))
   )
 let parseSpeed can_id can_dlc data  = 
     // meet the preconditions
