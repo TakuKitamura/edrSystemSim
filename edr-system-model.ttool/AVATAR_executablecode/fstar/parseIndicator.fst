@@ -2,9 +2,8 @@ module ParseIndicator
 
 open LowStar.BufferOps
 open FStar.HyperStack.ST
-open LowStar.Printf
-open FStar.Int.Cast
 open C.String
+open FStar.Int.Cast
 open HardCoding
 
 module I8 = FStar.Int8

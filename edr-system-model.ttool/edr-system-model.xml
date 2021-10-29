@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="0">
+<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="1">
 
 <Modeling type="AVATAR Design" nameTab="Design" tabs="Block Diagram$EDRSystemBlock" >
 <AVATARBlockDiagramPanel name="Block Diagram" minX="20" maxX="25000" minY="20" maxY="15000" zoom="1.953125" >
@@ -63,7 +63,7 @@
 <Method value="fstar_uint16 parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp; &amp;return;can_id == 0x1b4 &amp;&amp;&amp;return;can_dlc == 5 &amp;&amp;&amp;return;get(data, 1) &amp;gt;= 0xD0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0" ensureRefinementType="(fstar_uint16.error.code == 0 &amp;&amp; fstar_uint16.value &amp;lt;= 0x2fd0 ) ||&amp;return;fstar_uint16.error.code == 1" requireLogic="" ensureLogic="" />
 <Method value="fstar_uint8 parseDoor(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x19B &amp;&amp;&amp;return;can_dlc == 6 &amp;&amp;&amp;return;get(data, 0) == 0 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) &amp;lt;= 0x0F &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0 &amp;&amp;&amp;return;get(data, 5) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 2)) ||&amp;return;fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
 <Method value="fstar_uint8 parseIndicator(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x188 &amp;&amp;&amp;return;can_dlc == 4 &amp;&amp;&amp;return;get(data, 0) &amp;lt;= 0x02 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 0)) ||&amp;return;fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
-<Method value="int record_in_edr(uint32 can_id, uint64 timestamp, uint8[] speed, uint8 indicator, uint8 door)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
+<Method value="int recordInEDR(uint32 can_id, uint64 timestamp, uint8[] speed, uint8 indicator, uint8 door)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
 </extraparam>
 </COMPONENT>
 
@@ -391,7 +391,7 @@
 <computeMin value="" enabled="true"/>
 <computeMax value="" enabled="true"/>
 <probability value="" enabled="true"/>
-<actions value="recordInEDRResult = record_in_edr(canID, timestamp, speedValue, indicatorValue, doorValue)" enabled="true"/>
+<actions value="recordInEDRResult = recordInEDR(canID, timestamp, speedValue, indicatorValue, doorValue)" enabled="true"/>
 <actions value="" enabled="true"/>
 </extraparam>
 </SUBCOMPONENT>
