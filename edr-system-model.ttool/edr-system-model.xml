@@ -59,11 +59,11 @@
 <Attribute access="0" id="message" value="" type="5" typeOther="C_String_t" refinementType="" />
 <Attribute access="0" id="code" value="" type="5" typeOther="uint32" refinementType="" />
 <Attribute access="0" id="recordInEDRResult" value="" type="5" typeOther="int32" refinementType="" />
-<Method value="can_packet packetCapture(int32 fd)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
-<Method value="fstar_uint16 parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp; &amp;return;can_id == 0x1b4 &amp;&amp;&amp;return;can_dlc == 5 &amp;&amp;&amp;return;get(data, 1) &amp;gt;= 0xD0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0" ensureRefinementType="(fstar_uint16.error.code == 0 &amp;&amp; fstar_uint16.value &amp;lt;= 0x2fd0 ) ||&amp;return;fstar_uint16.error.code == 1" requireLogic="" ensureLogic="" />
-<Method value="fstar_uint8 parseIndicator(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x188 &amp;&amp;&amp;return;can_dlc == 4 &amp;&amp;&amp;return;get(data, 0) &amp;lt;= 0x02 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 0) &amp;&amp; fstar_uint8.value &amp;lt;= 0x02) ||&amp;return;fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
-<Method value="fstar_uint8 parseDoor(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x19B &amp;&amp;&amp;return;can_dlc == 6 &amp;&amp;&amp;return;get(data, 0) == 0 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) &amp;lt;= 0x0F &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0 &amp;&amp;&amp;return;get(data, 5) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 2) &amp;&amp; fstar_uint8.value &amp;lt;= 0x0F) ||&amp;return;fstar_uint8.error.code == 1" requireLogic="" ensureLogic="" />
-<Method value="int recordInEDR(uint32 can_id, uint64 timestamp, uint8[] speed, uint8 indicator, uint8 door)" requireRefinementType="" ensureRefinementType="" requireLogic="" ensureLogic="" />
+<Method value="can_packet packetCapture(int32 fd)" requireRefinementType="" ensureRefinementType="" />
+<Method value="fstar_uint16 parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp; &amp;return;can_id == 0x1b4 &amp;&amp;&amp;return;can_dlc == 5 &amp;&amp;&amp;return;get(data, 1) &amp;gt;= 0xD0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0" ensureRefinementType="(fstar_uint16.error.code == 0 &amp;&amp; fstar_uint16.value &amp;lt;= 0x2fd0 ) ||&amp;return;fstar_uint16.error.code == 1" />
+<Method value="fstar_uint8 parseIndicator(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x188 &amp;&amp;&amp;return;can_dlc == 4 &amp;&amp;&amp;return;get(data, 0) &amp;lt;= 0x02 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 0) &amp;&amp; fstar_uint8.value &amp;lt;= 0x02) ||&amp;return;fstar_uint8.error.code == 1" />
+<Method value="fstar_uint8 parseDoor(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x19B &amp;&amp;&amp;return;can_dlc == 6 &amp;&amp;&amp;return;get(data, 0) == 0 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) &amp;lt;= 0x0F &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0 &amp;&amp;&amp;return;get(data, 5) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 2) &amp;&amp; fstar_uint8.value &amp;lt;= 0x0F) ||&amp;return;fstar_uint8.error.code == 1" />
+<Method value="int recordInEDR(uint32 can_id, uint64 timestamp, uint8[] speed, uint8 indicator, uint8 door)" requireRefinementType="" ensureRefinementType="" />
 </extraparam>
 </COMPONENT>
 
@@ -2188,7 +2188,7 @@ EDRにデータを書き込んだとき返り値は1
 </COMPONENT>
 
 <COMPONENT type="301" id="1290" uid="72f50944-b527-4795-8bfb-6eea18147100" >
-<cdparam x="903" y="89" />
+<cdparam x="903" y="93" />
 <sizeparam width="92" height="15" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
