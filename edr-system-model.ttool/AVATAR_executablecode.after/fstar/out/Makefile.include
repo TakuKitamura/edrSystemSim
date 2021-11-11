@@ -1,5 +1,0 @@
-USER_TARGET=
-USER_CFLAGS=
-USER_C_FILES=
-ALL_C_FILES=C.c HardCoding.c ParseDoor.c ParseIndicator.c ParseSpeed.c
-ALL_H_FILES=C.h C_String.h HardCoding.h ParseDoor.h ParseIndicator.h ParseSpeed.h

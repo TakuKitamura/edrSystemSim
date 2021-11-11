@@ -65,20 +65,20 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__PacketParseState: 
-      if (canID != 0x1b4&&canID!=0x188&&canID!=0x19b) {
-        makeNewRequest(&__req0__EDRSystemBlock, 253, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (canID == 0x19b) {
+        makeNewRequest(&__req0__EDRSystemBlock, 134, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
-      if (canID == 0x1b4) {
-        makeNewRequest(&__req1__EDRSystemBlock, 302, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+      if (canID == 0x188) {
+        makeNewRequest(&__req1__EDRSystemBlock, 138, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
-      if (canID == 0x188) {
-        makeNewRequest(&__req2__EDRSystemBlock, 306, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+      if (canID == 0x1b4) {
+        makeNewRequest(&__req2__EDRSystemBlock, 142, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
-      if (canID == 0x19b) {
-        makeNewRequest(&__req3__EDRSystemBlock, 310, IMMEDIATE, 0, 0, 0, 0, __params3__EDRSystemBlock);
+      if (canID != 0x1b4&&canID!=0x188&&canID!=0x19b) {
+        makeNewRequest(&__req3__EDRSystemBlock, 186, IMMEDIATE, 0, 0, 0, 0, __params3__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req3__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -89,19 +89,19 @@ void *mainFunc__EDRSystemBlock(void *arg){
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        __currentState = STATE__PacketCaptureState;
+        __currentState = STATE__ParseDoorState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
-        __currentState = STATE__ParseSpeedState;
-        
-      }
-      else  if (__returnRequest__EDRSystemBlock == &__req2__EDRSystemBlock) {
         __currentState = STATE__ParseIndicatorState;
         
       }
+      else  if (__returnRequest__EDRSystemBlock == &__req2__EDRSystemBlock) {
+        __currentState = STATE__ParseSpeedState;
+        
+      }
       else  if (__returnRequest__EDRSystemBlock == &__req3__EDRSystemBlock) {
-        __currentState = STATE__ParseDoorState;
+        __currentState = STATE__PacketCaptureState;
         
       }
       break;
@@ -115,12 +115,12 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__CheckValidationResultState: 
-      if (code == 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 376, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (code > 0) {
+        makeNewRequest(&__req0__EDRSystemBlock, 65, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
-      if (code > 0) {
-        makeNewRequest(&__req1__EDRSystemBlock, 379, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+      if (code == 0) {
+        makeNewRequest(&__req1__EDRSystemBlock, 69, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -131,11 +131,11 @@ void *mainFunc__EDRSystemBlock(void *arg){
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        __currentState = STATE__RecordInEDRState;
+        __currentState = STATE__ValidationErrorState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
-        __currentState = STATE__ValidationErrorState;
+        __currentState = STATE__RecordInEDRState;
         
       }
       break;
@@ -146,16 +146,16 @@ void *mainFunc__EDRSystemBlock(void *arg){
       break;
       
       case STATE__CheckRecordInEDRResultState: 
-      if (recordInEDRResult == 0) {
-        makeNewRequest(&__req0__EDRSystemBlock, 279, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
+      if (recordInEDRResult == 2) {
+        makeNewRequest(&__req0__EDRSystemBlock, 156, IMMEDIATE, 0, 0, 0, 0, __params0__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req0__EDRSystemBlock);
       }
-      if (recordInEDRResult == 1) {
-        makeNewRequest(&__req1__EDRSystemBlock, 284, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
+      if (recordInEDRResult == 0) {
+        makeNewRequest(&__req1__EDRSystemBlock, 161, IMMEDIATE, 0, 0, 0, 0, __params1__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req1__EDRSystemBlock);
       }
-      if (recordInEDRResult == 2) {
-        makeNewRequest(&__req2__EDRSystemBlock, 288, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
+      if (recordInEDRResult == 1) {
+        makeNewRequest(&__req2__EDRSystemBlock, 190, IMMEDIATE, 0, 0, 0, 0, __params2__EDRSystemBlock);
         addRequestToList(&__list__EDRSystemBlock, &__req2__EDRSystemBlock);
       }
       if (nbOfRequests(&__list__EDRSystemBlock) == 0) {
@@ -166,15 +166,15 @@ void *mainFunc__EDRSystemBlock(void *arg){
       __returnRequest__EDRSystemBlock = executeListOfRequests(&__list__EDRSystemBlock);
       clearListOfRequests(&__list__EDRSystemBlock);
        if (__returnRequest__EDRSystemBlock == &__req0__EDRSystemBlock) {
-        __currentState = STATE__NormalLoopState;
+        __currentState = STATE__EDRErrorState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req1__EDRSystemBlock) {
-        __currentState = STATE__WroteEventToRecordState;
+        __currentState = STATE__NormalLoopState;
         
       }
       else  if (__returnRequest__EDRSystemBlock == &__req2__EDRSystemBlock) {
-        __currentState = STATE__EDRErrorState;
+        __currentState = STATE__WroteEventToRecordState;
         
       }
       break;
