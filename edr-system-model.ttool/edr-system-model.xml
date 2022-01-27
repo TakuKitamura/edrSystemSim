@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="1">
+<TURTLEGMODELING version="1.0beta" ANIMATE_INTERACTIVE_SIMULATION="true" ACTIVATE_PENALTIES="true" UPDATE_INFORMATION_DIPLO_SIM="true" ANIMATE_WITH_INFO_DIPLO_SIM="true" OPEN_DIAG_DIPLO_SIM="false" LAST_SELECTED_MAIN_TAB="0" LAST_SELECTED_SUB_TAB="0">
 
 <Modeling type="AVATAR Design" nameTab="Design" tabs="Block Diagram$EDRSystemBlock" >
 <AVATARBlockDiagramPanel name="Block Diagram" minX="20" maxX="25000" minY="20" maxY="15000" zoom="1.953125" >
@@ -13,7 +13,7 @@
 
 <COMPONENT type="5000" id="25" uid="2358cb42-a743-4750-a7ea-f5e09fcc9d38" >
 <cdparam x="610" y="642" />
-<sizeparam width="674" height="557" minWidth="12" minHeight="5" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="931" height="575" minWidth="12" minHeight="5" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="10" maxX="12800" minY="10" maxY="7680" />
 <infoparam name="Block0" value="EDRSystemBlock" />
@@ -63,7 +63,7 @@
 <Method value="fstar_uint16 parseSpeed(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp; &amp;return;can_id == 0x1b4 &amp;&amp;&amp;return;can_dlc == 5 &amp;&amp;&amp;return;get(data, 1) &amp;gt;= 0xD0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0" ensureRefinementType="(fstar_uint16.error.code == 0 &amp;&amp; fstar_uint16.value &amp;lt;= 0x2fd0 ) ||&amp;return;fstar_uint16.error.code == 1" />
 <Method value="fstar_uint8 parseIndicator(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x188 &amp;&amp;&amp;return;can_dlc == 4 &amp;&amp;&amp;return;get(data, 0) &amp;lt;= 0x02 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) == 0 &amp;&amp;&amp;return;get(data, 3) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 0) &amp;&amp; fstar_uint8.value &amp;lt;= 0x02) ||&amp;return;fstar_uint8.error.code == 1" />
 <Method value="fstar_uint8 parseDoor(uint32 can_id, uint8 can_dlc, uint8[] data)" requireRefinementType="len(data) == 8 &amp;&amp;&amp;return;can_id == 0x19B &amp;&amp;&amp;return;can_dlc == 6 &amp;&amp;&amp;return;get(data, 0) == 0 &amp;&amp;&amp;return;get(data, 1) == 0 &amp;&amp;&amp;return;get(data, 2) &amp;lt;= 0x0F &amp;&amp;&amp;return;get(data, 3) == 0 &amp;&amp;&amp;return;get(data, 4) == 0 &amp;&amp;&amp;return;get(data, 5) == 0" ensureRefinementType="(fstar_uint8.error.code == 0 &amp;&amp; fstar_uint8.value == get(data, 2) &amp;&amp; fstar_uint8.value &amp;lt;= 0x0F) ||&amp;return;fstar_uint8.error.code == 1" />
-<Method value="int recordInEDR(uint32 can_id, uint64 timestamp, uint8[] speed, uint8 indicator, uint8 door)" requireRefinementType="" ensureRefinementType="" />
+<Method value="int32 recordInEDR(uint32 can_id, uint64 timestamp, uint16 speed, uint8 indicator, uint8 door)" requireRefinementType="" ensureRefinementType="" />
 </extraparam>
 </COMPONENT>
 
@@ -241,7 +241,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="63" uid="e0bfef3f-a754-4d6f-9e3a-8c801e23c434" >
 <father id="65" num="0" />
 <cdparam x="979" y="812" />
-<sizeparam width="70" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="75" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="10" maxX="19997" minY="10" maxY="11997" />
@@ -274,7 +274,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="70" uid="b0131310-bfd4-49d0-9b81-cdbcd20db225" >
 <father id="72" num="0" />
 <cdparam x="734" y="817" />
-<sizeparam width="80" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="85" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="13" maxX="19997" minY="13" maxY="11997" />
@@ -307,7 +307,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="77" uid="a3b7b2e2-0761-4be5-b7de-6c46ab473030" >
 <father id="79" num="0" />
 <cdparam x="895" y="217" />
-<sizeparam width="93" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="104" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="10" maxX="19997" minY="10" maxY="11997" />
@@ -351,7 +351,7 @@
 <SUBCOMPONENT type="-1" id="85" uid="bf8408bf-3968-4815-99da-e9cb3b51792e" >
 <father id="88" num="1" />
 <cdparam x="1123" y="691" />
-<sizeparam width="231" height="60" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="249" height="60" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="16" maxX="19997" minY="16" maxY="11997" />
@@ -398,7 +398,7 @@
 <SUBCOMPONENT type="-1" id="94" uid="a437234c-9d93-4efa-b259-ca8460259cfe" >
 <father id="97" num="1" />
 <cdparam x="438" y="684" />
-<sizeparam width="248" height="60" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="269" height="60" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="16" maxX="19997" minY="16" maxY="11997" />
@@ -435,7 +435,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="102" uid="74bcbb64-c87e-42a3-9bee-7c40e77ce39a" >
 <father id="104" num="0" />
 <cdparam x="706" y="690" />
-<sizeparam width="276" height="60" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="300" height="60" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="16" maxX="19997" minY="16" maxY="11997" />
@@ -482,7 +482,7 @@
 <SUBCOMPONENT type="-1" id="110" uid="4645ab0e-9d93-422c-99bd-d186e3d79e73" >
 <father id="113" num="1" />
 <cdparam x="1020" y="436" />
-<sizeparam width="115" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="119" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="16" maxX="19997" minY="16" maxY="11997" />
@@ -515,7 +515,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="118" uid="7ccd7dd5-b591-4e3b-aa22-33aa77a0cb05" >
 <father id="120" num="0" />
 <cdparam x="889" y="531" />
-<sizeparam width="115" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="119" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="16" maxX="19997" minY="16" maxY="11997" />
@@ -558,7 +558,7 @@
 <SUBCOMPONENT type="-1" id="126" uid="cb0878b8-9db6-473e-85d9-e59989824dd1" >
 <father id="129" num="1" />
 <cdparam x="641" y="436" />
-<sizeparam width="115" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="119" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="16" maxX="19997" minY="16" maxY="11997" />
@@ -591,7 +591,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="134" uid="324a6c41-0327-4fb8-879b-3b48bd4d7cd4" >
 <father id="136" num="0" />
 <cdparam x="417" y="1043" />
-<sizeparam width="547" height="30" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="582" height="30" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="10" maxX="1995" minY="10" maxY="1195" />
@@ -768,7 +768,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="171" uid="c0fcd883-c9f3-4378-a67b-e28eff04743a" >
 <father id="173" num="0" />
 <cdparam x="896" y="340" />
-<sizeparam width="202" height="90" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="220" height="90" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="10" maxX="19995" minY="10" maxY="11995" />
@@ -840,7 +840,7 @@
 </CONNECTOR><SUBCOMPONENT type="-1" id="185" uid="bcd49237-8058-467f-8b82-35032fe1764f" >
 <father id="187" num="0" />
 <cdparam x="476" y="372" />
-<sizeparam width="343" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="362" height="15" minWidth="1" minHeight="1" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <enabled value="true" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
@@ -2147,7 +2147,7 @@
 
 <COMPONENT type="301" id="1273" uid="72f50944-b527-4795-8bfb-6eea18147100" >
 <cdparam x="961" y="990" />
-<sizeparam width="338" height="99" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="345" height="99" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
 <infoparam name="UML Note" value="recordInEDR関数
@@ -2247,7 +2247,7 @@ EDRにデータを書き込んだとき返り値は1
 
 <COMPONENT type="301" id="1324" uid="00e4a3fe-1f6f-495e-bdad-99e25c5be079" >
 <cdparam x="1084" y="348" />
-<sizeparam width="268" height="39" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="270" height="39" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
 <infoparam name="UML Note" value="packetCapture関数
@@ -2335,7 +2335,7 @@ CANパケットをライブラリ関数で読み取り,
 
 <COMPONENT type="301" id="1375" uid="72f50944-b527-4795-8bfb-6eea18147100" >
 <cdparam x="545" y="829" />
-<sizeparam width="680" height="15" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="686" height="15" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
 <infoparam name="UML Note" value="パケットが正常であるか異常であるか判定し,正常であればcode==0とパース結果を返し,エラーであればcode==1を返す
@@ -2449,7 +2449,7 @@ CANパケットをライブラリ関数で読み取り,
 
 <COMPONENT type="301" id="1443" uid="72f50944-b527-4795-8bfb-6eea18147100" >
 <cdparam x="568" y="1161" />
-<sizeparam width="284" height="15" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="285" height="15" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
 <infoparam name="UML Note" value="もしEDRへデータを引き続き保持し続けるならば
@@ -2477,7 +2477,7 @@ CANパケットをライブラリ関数で読み取り,
 
 <COMPONENT type="301" id="1460" uid="72f50944-b527-4795-8bfb-6eea18147100" >
 <cdparam x="189" y="1142" />
-<sizeparam width="324" height="15" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
+<sizeparam width="325" height="15" minWidth="20" minHeight="10" maxWidth="2000" maxHeight="2000" minDesiredWidth="0" minDesiredHeight="0" />
 <hidden value="false" />
 <cdrectangleparam minX="8" maxX="25000" minY="8" maxY="15000" />
 <infoparam name="UML Note" value="もし,EDRへ今まで保持したデータを書き込みするならば
